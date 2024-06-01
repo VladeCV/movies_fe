@@ -9,6 +9,13 @@ import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import {ToolbarModule} from "primeng/toolbar";
 import {PanelModule} from "primeng/panel";
+import {ReactiveFormsModule} from "@angular/forms";
+import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {DropdownModule} from "primeng/dropdown";
+import {RippleModule} from "primeng/ripple";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -23,7 +30,14 @@ import {PanelModule} from "primeng/panel";
     ButtonModule,
     TableModule,
     ToolbarModule,
-    PanelModule
+    PanelModule,
+    ReactiveFormsModule,
+    DialogModule,
+    InputTextModule,
+    DropdownModule,
+    RippleModule,
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class MovieModule {

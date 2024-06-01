@@ -20,6 +20,13 @@ export class MovieService {
 
   }
 
+  saveMovieAPI(data: any): Observable<any> {
+    let url = 'https://sandbox-devtest.azurewebsites.net/api/movies';
+    return this.http.post(url, data).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

@@ -1,0 +1,40 @@
+<form [formGroup]="formMovie">
+  <div class="p-fluid grid  form-gen">
+    <div class="field col-12">
+      <label for="title">Title: </label>
+      <input formControlName="title" type="text" id="title" pInputText>
+      <div *ngIf="formMovie.get('title')?.touched && formMovie.get('title')?.invalid">
+        <span class="text-danger" *ngIf="formMovie.get('title')?.hasError('required')">Title is required.</span>
+        <br>
+        <span class="text-danger" *ngIf="formMovie.get('title')?.hasError('invalidTitle')">Title can only contain letters, numbers and spaces.</span>
+      </div>
+    </div>
+
+    <div class="field col-12">
+      <label for="releaseYear">Release Year :</label>
+      <input formControlName="releaseYear" type="text" id="releaseYear" pInputText>
+      <div *ngIf="formMovie.get('releaseYear')?.touched && formMovie.get('releaseYear')?.invalid">
+        <span class="text-danger"
+              *ngIf="formMovie.get('releaseYear')?.hasError('required')">Release Year is required.</span>
+        <br>
+        <span class="text-danger"
+              *ngIf="formMovie.get('releaseYear')?.hasError('yearRange')">Release Year must be between 1888 and 2024.</span>
+      </div>
+    </div>
+
+    <div class="field col-12">
+      <label>Category: </label>
+      <p-dropdown [options]="categoryList" optionLabel="description" [filter]="true" [showClear]="true"
+                  appendTo="body"
+                  placeholder="Select an option:" formControlName="category" [editable]="true" filterBy="description">
+        <ng-template let-item pTemplate="item">
+          {{ item.description }}
+        </ng-template>
+      </p-dropdown>
+      <div *ngIf="formMovie.get('description')?.touched && formMovie.get('description')?.invalid">
+        <span class="text-danger"
+              *ngIf="formMovie.get('description')?.hasError('required')">Category is required.</span>
+      </div>
+    </div>
+  </div>
+</form>

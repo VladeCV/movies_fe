@@ -7,7 +7,8 @@
 <div class="card p-2">
   <div class="flex flex-row-reverse">
     <div class="col-12 lg:col-3 p-lg-offset-9">
-      <p-button label="Add New" icon="pi pi-plus" styleClass="p-button-sm" class="btn-100"></p-button>
+      <p-button label="Add New" icon="pi pi-plus" styleClass="p-button-sm" class="btn-100"
+                (click)="showForm()"></p-button>
     </div>
   </div>
 </div>
@@ -46,4 +47,26 @@
 
   </p-table>
 
+</div>
+<p-dialog header="New Movie" [breakpoints]="{'960px': '85vw'}" [style]="{width: '35vw'}"
+          [draggable]="false"
+          [resizable]="false" [modal]="true" appendTo="body" [position]="'top'" [(visible)]="displayForm">
+  <div class="p-2">
+    <app-movie-form #formMovie></app-movie-form>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple (click)="displayForm=false" type="button" label="Cancel" class="p-button-text"
+            icon="pi pi-times"></button>
+    <p-button (click)="save($event,'add')" label="Save" icon="pi pi-save" *ngIf="actionType=='add'"></p-button>
+
+  </ng-template>
+
+</p-dialog>
+
+<div class="card flex justify-content-center gap-2">
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <p-button (click)="confirm1()" icon="pi pi-check" label="Confirm"></p-button>
+  <p-button (click)="confirm2()" icon="pi pi-times" label="Delete" class="p-button-danger"></p-button>
 </div>

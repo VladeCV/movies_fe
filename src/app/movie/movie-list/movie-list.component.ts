@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MovieService} from "../service/movie.service";
 import {MovieFormComponent} from "../movie-form/movie-form.component";
-import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-movie-list',
@@ -11,7 +11,10 @@ import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api
 export class MovieListComponent implements OnInit {
   products: any = [];
   displayForm: boolean = false;
+  displayRating: boolean = false;
+  valueRating: number = 0;
   actionType: string = '';
+  movieValue: any = {};
   @ViewChild('formMovie') formMovie!: MovieFormComponent;
 
   constructor(
@@ -80,46 +83,21 @@ export class MovieListComponent implements OnInit {
 
   }
 
-  confirm1() {
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
-      },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled'});
-            break;
-        }
-      }
-    });
+
+  editProduct(product: any) {
+    this.displayRating = true;
+    this.movieValue = product
   }
 
-  confirm2() {
-    this.confirmationService.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-info-circle',
-      accept: () => {
-        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'Record deleted'});
-      },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled'});
-            break;
-        }
-      }
-    });
+  saveRating($event: MouseEvent, add: string) {
+    console.log(this.movieValue);
+    console.log('rating', this.valueRating);
+    const data = {
+      id: this.movieValue.id,
+      value: this.valueRating
+    }
+    console.log(data);
+    this.displayRating = false;
+    this.valueRating = 0;
   }
-
 }
